@@ -170,4 +170,36 @@ function iit_display_hours_format_message($incluldeOpenMsg){
   
 }
 
+function iit_test_hours_cache_format_message($incluldeOpenMsg){
+  $debug=false;
+  $galvinCal=" iit.edu_eqksa4h63kmbbb1a8nhtp5mnr0@group.calendar.google.com";
+  $dataObj=iit_display_hours_get_calendar_data($galvinCal);
+  $closed="";
 
+  if (count($dataObj)>0){
+    if ($debug){
+      print_r($dataObj[0]);
+    }
+    $message = "<p>" . iit_display_hours_format_hours_data($dataObj) . " " . l(t('more...'), '/hours',array('attributes'=>array('class'=>'page-hide bump-right'))) . "</p>";
+    
+    if ($incluldeOpenMsg>0) {// won't use this flag for hours page
+      $isOpen = iit_display_hours_check_if_open($dataObj[0]);
+      $openMsg = iit_display_hours_format_open_msg($isOpen);
+      $message .= "<p class=\"clear\">Currently: $openMsg</p>";
+    }
+  }
+  else{
+    $message .= "<p>Library hours cannot be displayed at this time.</p>";
+  }
+
+  return $message;  
+  
+}
+
+
+
+function iit_test_hours_cache_get_and_format_todays_date(){
+  $dateFormat="l, F j";
+  $today = date($dateFormat) . "<br>" . date();
+  return $today;
+}
