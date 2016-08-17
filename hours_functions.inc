@@ -135,7 +135,7 @@ function iit_display_hours_format_todays_hours($startTime,$endTime){
     return "Open 24 hours";
   }
   else if  ( ($endTime=="12 a.m.") && ($startTime!="12 a.m.") ){
-    return "Open $startTime - overnight";
+    return "Open $startTime - Midnight";
   }
   else if  (($endTime!="12 a.m.") && ($startTime=="12 a.m.")){
     return "Open overnight until $endTime";
